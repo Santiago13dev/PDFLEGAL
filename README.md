@@ -1,8 +1,8 @@
 
 # PDFLEGAL — Asistente Legal Ciudadano (100% JavaScript)
 
-> Plataforma web para **crear, editar y exportar documentos legales** a partir de plantillas con `{{placeholders}}`.  
-> Frontend: **React + Vite + Tailwind** · Backend: **Node.js + Express + MongoDB** · Auth: **JWT** · PDF: **html2pdf.js**.
+ Plataforma web para **crear, editar y exportar documentos legales** a partir de plantillas con `{{placeholders}}`.  
+ Frontend: **React + Vite + Tailwind** · Backend: **Node.js + Express + MongoDB** · Auth: **JWT** · PDF: **html2pdf.js**.
 
 ---
 
