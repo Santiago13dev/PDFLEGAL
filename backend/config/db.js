@@ -1,3 +1,4 @@
+//conexion a mongo DB
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
