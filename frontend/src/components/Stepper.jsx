@@ -1,3 +1,4 @@
+//Su objetivo es guiar visualmente y mostrar progreso dentro de ese flujo.
 import React from "react";
 export default function Stepper({ step = 1 }) {
   const steps = ["Datos", "Vista previa", "Descarga"];

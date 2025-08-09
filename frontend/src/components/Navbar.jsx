@@ -1,3 +1,4 @@
+//Su objetivo es que el usuario pueda moverse entre secciones en cualquier momento.
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
