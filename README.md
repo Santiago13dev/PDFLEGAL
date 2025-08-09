@@ -282,6 +282,6 @@ MIT (o la que prefieras).
 - Editor WYSIWYG con placeholders (contenteditable + toolbar).
 - Firmas y sellos (canvas/imagen).
 - Versionado de plantillas y control de acceso por rol (admin).
-- Auditoría y estadísticas (uso por plantilla).
-- Índice real para normativa colombiana (con fuente oficial).
-- Exportación adicional a DOCX (con `docxtemplater` en Node).
+- Auditoría y estadísticas (uso por plantilla). ( listo el codigo)
+- Índice real para normativa colombiana (con fuente oficial). (listo el codigo)
+- Exportación adicional a DOCX (con `docxtemplater` en Node). (en proceso)

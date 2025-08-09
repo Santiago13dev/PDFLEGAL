@@ -2,6 +2,8 @@
 import Document from "../models/Document.js";
 import Template from "../models/Template.js";
 import { ok, fail } from "../utils/response.js";
+import { logEvent } from '../services/audit.js';
+
 function esc(s) {
   return String(s).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -23,6 +25,12 @@ export async function create(req, res) {
       templateId,
       data,
       html,
+    });
+    await logEvent({
+      userId: req.user.id,
+      templateId: templateId,
+      documentId: doc._id,
+      event: 'DOCUMENT_CREATE'
     });
     return ok(res, { item: doc }, 201);
   } catch (e) {

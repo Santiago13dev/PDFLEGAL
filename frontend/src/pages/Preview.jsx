@@ -4,6 +4,8 @@ import Navbar from "../components/Navbar.jsx";
 import Stepper from "../components/Stepper.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import html2pdf from "html2pdf.js";
+import { AnalyticsAPI } from '../services/analytics.js';
+
 export default function Preview() {
   const { state } = useLocation();
   const nav = useNavigate();
@@ -21,6 +23,12 @@ export default function Preview() {
       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
     };
     html2pdf().set(opt).from(ref.current).save();
+  AnalyticsAPI.addEvent({
+   event: 'DOCUMENT_EXPORT',
+   templateId: state?.templateId || null,   // si lo pasas en state
+   documentId: state?.documentId || null,   // si lo pasas en state
+   meta: { filename: (state?.title || 'documento') + '.pdf' }
+}).catch(() => {})
   }
   return (
     <>

@@ -10,10 +10,13 @@ import Preview from "./pages/Preview.jsx";
 import Search from "./pages/Search.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import { AuthProvider } from "./store/auth.js";
+import Analytics from './pages/Analytics.jsx';
+
 export default function App() {
   return (
     <AuthProvider>
       <Routes>
+        <Route path="/analytics" element={<ProtectedRoute><Analytics/></ProtectedRoute>} />
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

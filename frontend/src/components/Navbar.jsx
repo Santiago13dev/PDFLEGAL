@@ -45,6 +45,12 @@ export default function Navbar() {
               >
                 Comenzar Gratis
               </Link>
+          {user && (
+              <Link to="/analytics" className="px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50">
+    
+               Estadísticas
+            </Link>
+           )}
             </>
           ) : (
             <>

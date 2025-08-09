@@ -1,6 +1,8 @@
 // crear, listar, editar y borrar plantillas.
 import Template from "../models/Template.js";
 import { ok, fail } from "../utils/response.js";
+import { logEvent } from '../services/audit.js';
+
 export async function list(req, res) {
   const items = await Template.find({
     $or: [{ userId: null }, { userId: req.user?.id }],
@@ -18,6 +20,7 @@ export async function create(req, res) {
       fields,
       content,
     });
+    await logEvent({ userId: req.user.id, templateId: item._id, event: 'TEMPLATE_CREATE' })
     return ok(res, { item }, 201);
   } catch (e) {
     return fail(res, e.message || "Error creando plantilla", 500);
