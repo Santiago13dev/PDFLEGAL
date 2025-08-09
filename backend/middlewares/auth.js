@@ -1,3 +1,4 @@
+//autenticación de la pagina
 import jwt from "jsonwebtoken";
 import { fail } from "../utils/response.js";
 export function requireAuth(req, res, next) {
