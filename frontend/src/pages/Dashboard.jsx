@@ -1,6 +1,60 @@
-import React,{useEffect,useState} from 'react'; import Navbar from '../components/Navbar.jsx'; import { TemplateAPI } from '../services/api.js'; import { Link } from 'react-router-dom';
-export default function Dashboard(){ const [items,setItems]=useState([]); useEffect(()=>{ TemplateAPI.list().then(res=>setItems(res.items||[])).catch(()=>setItems([])); },[]);
-  return (<><Navbar/><section className='container-app py-10'><div className='flex items-end justify-between gap-4'><div><h2 className='text-2xl font-bold text-slate-900'>Bienvenido</h2><p className='text-slate-700'>Elige una plantilla para empezar</p></div><div><Link to='/upload' className='px-3 py-2 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50'>Subir documento</Link></div></div>
-  <div className='mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4'>{items.map(tpl=>(<div key={tpl._id} className='rounded-2xl border border-slate-200 bg-white p-5 hover:shadow transition'><h3 className='font-semibold text-slate-900'>{tpl.title}</h3><p className='text-sm text-slate-600 mt-1'>{tpl.description}</p>
-  <div className='mt-4 flex items-center justify-between'><span className='text-xs text-slate-500'>{(tpl.fields||[]).length} campos</span><Link to={`/form/${tpl._id}`} className='px-3 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-500'>Crear documento</Link></div></div>))}
-  {items.length===0&&<p className='text-sm text-slate-600'>No hay plantillas aún. Sube un documento.</p>}</div></section></>); }
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar.jsx";
+import { TemplateAPI } from "../services/api.js";
+import { Link } from "react-router-dom";
+export default function Dashboard() {
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    TemplateAPI.list()
+      .then((res) => setItems(res.items || []))
+      .catch(() => setItems([]));
+  }, []);
+  return (
+    <>
+      <Navbar />
+      <section className="container-app py-10">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <h2 className="text-2xl font-bold text-slate-900">Bienvenido</h2>
+            <p className="text-slate-700">Elige una plantilla para empezar</p>
+          </div>
+          <div>
+            <Link
+              to="/upload"
+              className="px-3 py-2 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50"
+            >
+              Subir documento
+            </Link>
+          </div>
+        </div>
+        <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {items.map((tpl) => (
+            <div
+              key={tpl._id}
+              className="rounded-2xl border border-slate-200 bg-white p-5 hover:shadow transition"
+            >
+              <h3 className="font-semibold text-slate-900">{tpl.title}</h3>
+              <p className="text-sm text-slate-600 mt-1">{tpl.description}</p>
+              <div className="mt-4 flex items-center justify-between">
+                <span className="text-xs text-slate-500">
+                  {(tpl.fields || []).length} campos
+                </span>
+                <Link
+                  to={`/form/${tpl._id}`}
+                  className="px-3 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-500"
+                >
+                  Crear documento
+                </Link>
+              </div>
+            </div>
+          ))}
+          {items.length === 0 && (
+            <p className="text-sm text-slate-600">
+              No hay plantillas aún. Sube un documento.
+            </p>
+          )}
+        </div>
+      </section>
+    </>
+  );
+}

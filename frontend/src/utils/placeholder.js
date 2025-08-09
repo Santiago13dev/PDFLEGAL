@@ -1,3 +1,24 @@
-export function escapeRegExp(str){ return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
-export function replacePlaceholders(template, data){ return Object.keys(data||{}).reduce((acc,key)=>{ const re=new RegExp(`{{\\s*${escapeRegExp(key)}\\s*}}`,'g'); return acc.replace(re, data[key] ?? ''); }, template); }
-export function detectPlaceholders(text){ const set=new Set(); let i=0; while(true){ const s=text.indexOf('{{',i); if(s===-1) break; const e=text.indexOf('}}',s+2); if(e===-1) break; const raw=text.slice(s+2,e).trim(); const clean=[...raw].filter(ch=>/[a-zA-Z0-9_]/.test(ch)).join(''); if(clean) set.add(clean); i=e+2; } return Array.from(set); }
+export function escapeRegExp(str) {
+  return String(str).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+export function replacePlaceholders(template, data) {
+  return Object.keys(data || {}).reduce((acc, key) => {
+    const re = new RegExp(`{{\\s*${escapeRegExp(key)}\\s*}}`, "g");
+    return acc.replace(re, data[key] ?? "");
+  }, template);
+}
+export function detectPlaceholders(text) {
+  const set = new Set();
+  let i = 0;
+  while (true) {
+    const s = text.indexOf("{{", i);
+    if (s === -1) break;
+    const e = text.indexOf("}}", s + 2);
+    if (e === -1) break;
+    const raw = text.slice(s + 2, e).trim();
+    const clean = [...raw].filter((ch) => /[a-zA-Z0-9_]/.test(ch)).join("");
+    if (clean) set.add(clean);
+    i = e + 2;
+  }
+  return Array.from(set);
+}

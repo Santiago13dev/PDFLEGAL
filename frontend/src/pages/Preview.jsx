@@ -1,7 +1,71 @@
-import React,{useEffect,useRef} from 'react'; import Navbar from '../components/Navbar.jsx'; import Stepper from '../components/Stepper.jsx'; import { useLocation,useNavigate } from 'react-router-dom'; import html2pdf from 'html2pdf.js';
-export default function Preview(){ const { state } = useLocation(); const nav=useNavigate(); const ref=useRef(null); useEffect(()=>{ if(!state?.html) nav('/dashboard'); },[state,nav]);
-  function onExport(){ if(!ref.current) return; const opt={ margin:10, filename:(state?.title||'documento')+'.pdf', image:{type:'jpeg',quality:0.98}, html2canvas:{scale:2,useCORS:true}, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'} }; html2pdf().set(opt).from(ref.current).save(); }
-  return (<><Navbar/><section className='container-app py-10'><div className='grid lg:grid-cols-3 gap-6'><div className='lg:col-span-2'><div className='rounded-2xl border border-slate-200 bg-white p-6'><div ref={ref} className='prose max-w-none' dangerouslySetInnerHTML={{ __html: state?.html || '' }} /></div>
-  <div className='mt-4 flex gap-3'><button className='px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50' onClick={()=>nav(-1)}>Volver a editar</button>
-  <button className='px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-500' onClick={onExport}>Exportar (PDF)</button></div></div>
-  <aside className='space-y-4'><div className='rounded-2xl border border-slate-200 bg-white p-4 sticky top-20'><Stepper step={2}/><h4 className='mt-3 font-semibold text-slate-900'>Detalles</h4><ul className='mt-2 text-sm text-slate-700 space-y-1'><li><span className='font-medium'>Plantilla:</span> {state?.title || '—'}</li><li><span className='font-medium'>Exportación:</span> PDF</li></ul></div></aside></div></section></>); }
+import React, { useEffect, useRef } from "react";
+import Navbar from "../components/Navbar.jsx";
+import Stepper from "../components/Stepper.jsx";
+import { useLocation, useNavigate } from "react-router-dom";
+import html2pdf from "html2pdf.js";
+export default function Preview() {
+  const { state } = useLocation();
+  const nav = useNavigate();
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!state?.html) nav("/dashboard");
+  }, [state, nav]);
+  function onExport() {
+    if (!ref.current) return;
+    const opt = {
+      margin: 10,
+      filename: (state?.title || "documento") + ".pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    };
+    html2pdf().set(opt).from(ref.current).save();
+  }
+  return (
+    <>
+      <Navbar />
+      <section className="container-app py-10">
+        <div className="grid lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6">
+              <div
+                ref={ref}
+                className="prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: state?.html || "" }}
+              />
+            </div>
+            <div className="mt-4 flex gap-3">
+              <button
+                className="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50"
+                onClick={() => nav(-1)}
+              >
+                Volver a editar
+              </button>
+              <button
+                className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-500"
+                onClick={onExport}
+              >
+                Exportar (PDF)
+              </button>
+            </div>
+          </div>
+          <aside className="space-y-4">
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 sticky top-20">
+              <Stepper step={2} />
+              <h4 className="mt-3 font-semibold text-slate-900">Detalles</h4>
+              <ul className="mt-2 text-sm text-slate-700 space-y-1">
+                <li>
+                  <span className="font-medium">Plantilla:</span>{" "}
+                  {state?.title || "—"}
+                </li>
+                <li>
+                  <span className="font-medium">Exportación:</span> PDF
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </>
+  );
+}
