@@ -1,21 +1,4 @@
-const mongoose = require('mongoose');
-
-/**
- * Conecta la aplicación a MongoDB usando la URI proporcionada.
- * @param {string} uri Cadena de conexión a MongoDB
- * @returns {Promise<void>}
- */
-async function connectDB(uri) {
-  try {
-    await mongoose.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('✅ Conectado a MongoDB');
-  } catch (error) {
-    console.error('❌ Error al conectar a MongoDB:', error.message);
-    process.exit(1);
-  }
-}
-
-module.exports = connectDB;
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
+export async function connectDB(){ const uri=process.env.MONGODB_URI; if(!uri) throw new Error('MONGODB_URI not set'); mongoose.set('strictQuery', true); await mongoose.connect(uri); console.log('Mongo connected'); }

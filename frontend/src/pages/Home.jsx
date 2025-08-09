@@ -1,52 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import heroImg from '../assets/hero.png';
-
-/**
- * Página de inicio que presenta la aplicación PDFLEGAL. Muestra un héroe con
- * descripción de la plataforma y llamadas a la acción para registrarse o
- * iniciar sesión.
- */
-const Home = () => {
-  return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-1 bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse md:flex-row items-center gap-10">
-          <div className="md:w-1/2">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Genera documentos legales fácilmente
-            </h1>
-            <p className="mb-6 text-lg text-gray-700">
-              Crea contratos, cartas, poderes y más mediante formularios sencillos, sin necesidad de conocimientos jurídicos.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                to="/register"
-                className="inline-block text-center px-6 py-3 rounded-md bg-indigo-600 text-white font-medium shadow hover:bg-indigo-500 transition"
-              >
-                Comenzar
-              </Link>
-              <Link
-                to="/login"
-                className="inline-block text-center px-6 py-3 rounded-md bg-gray-200 text-gray-800 font-medium shadow hover:bg-gray-300 transition"
-              >
-                Ya tengo cuenta
-              </Link>
-            </div>
-          </div>
-          <div className="md:w-1/2 flex justify-center">
-            <img
-              src={heroImg}
-              alt="Ilustración documentos legales"
-              className="w-full max-w-md rounded-lg shadow-lg"
-            />
-          </div>
-        </div>
-      </main>
-    </div>
-  );
-};
-
-export default Home;
+import React from 'react'; import Navbar from '../components/Navbar.jsx'; import { Link } from 'react-router-dom'; import { useAuth } from '../store/auth.js';
+export default function Home(){ const { user } = useAuth(); return (<><Navbar /><section className='container-app py-16 lg:py-24'>
+  <div className='grid lg:grid-cols-2 gap-10 items-center'><div>
+    <div className='inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700'>⚡ Nuevo: IA Legal Avanzada</div>
+    <h1 className='mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900'>Revoluciona tus <span className='bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent'>documentos legales</span></h1>
+    <p className='mt-4 text-slate-700 text-lg'>La plataforma más avanzada para crear, editar y gestionar documentos legales. Potenciada por IA y diseñada para profesionales exigentes.</p>
+    <div className='mt-6 flex flex-col sm:flex-row gap-3'><Link to={user?'/upload':'/register'} className='px-5 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-500 shadow-sm'>Subir Documento</Link>
+    <Link to='/dashboard' className='px-5 py-3 rounded-xl border border-blue-600 text-blue-700 hover:bg-blue-50'>Explorar Plantillas</Link></div></div>
+    <div className='relative'><div className='relative rounded-3xl border border-slate-200 bg-white p-6 shadow-sm'><div className='h-56 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-700 font-medium'>Vista previa del documento</div>
+    <div className='mt-4 grid grid-cols-3 gap-3'><div className='h-20 rounded-lg bg-slate-50 border border-slate-200'/><div className='h-20 rounded-lg bg-slate-50 border border-slate-200'/><div className='h-20 rounded-lg bg-slate-50 border border-slate-200'/></div></div></div></div>
+</section></>); }
