@@ -1,4 +1,4 @@
-//rutas protegidas
+//Aquí definimos qué URL carga cada page
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../store/auth.js";

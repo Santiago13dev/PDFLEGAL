@@ -1,3 +1,4 @@
+// vista previa antes de exportar
 import React, { useEffect, useRef } from "react";
 import Navbar from "../components/Navbar.jsx";
 import Stepper from "../components/Stepper.jsx";

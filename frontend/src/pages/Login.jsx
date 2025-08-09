@@ -1,3 +1,4 @@
+//formulario de inicio de sesión
 import React, { useState } from "react";
 import Navbar from "../components/Navbar.jsx";
 import { useAuth } from "../store/auth.js";

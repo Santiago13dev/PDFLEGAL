@@ -1,3 +1,4 @@
+// generar y guardar documentos.
 import Document from "../models/Document.js";
 import Template from "../models/Template.js";
 import { ok, fail } from "../utils/response.js";

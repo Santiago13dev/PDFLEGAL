@@ -1,3 +1,4 @@
+// cada pagina que se puede visitar ( historial de documentos creados)
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar.jsx";
 import { TemplateAPI } from "../services/api.js";

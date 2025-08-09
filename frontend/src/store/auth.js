@@ -1,3 +1,8 @@
+// Aquí usamos AuthContext para guardar:
+//Datos del usuario logueado.
+//Token JWT.
+//Funciones como login(), logout().
+
 import React, { createContext, useContext, useState } from "react";
 import { AuthAPI } from "../services/api.js";
 const AuthCtx = createContext(null);

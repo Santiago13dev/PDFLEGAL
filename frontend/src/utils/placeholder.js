@@ -1,3 +1,4 @@
+// es tu caja de herramientas, donde guardas las funciones que usas en varias partes de la app.
 export function escapeRegExp(str) {
   return String(str).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

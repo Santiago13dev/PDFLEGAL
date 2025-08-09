@@ -1,3 +1,4 @@
+//título, contenido, campos.
 import mongoose from "mongoose";
 const fieldSchema = new mongoose.Schema(
   { name: String, label: String, type: String, required: Boolean },

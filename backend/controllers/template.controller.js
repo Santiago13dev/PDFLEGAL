@@ -1,3 +1,4 @@
+// crear, listar, editar y borrar plantillas.
 import Template from "../models/Template.js";
 import { ok, fail } from "../utils/response.js";
 export async function list(req, res) {
