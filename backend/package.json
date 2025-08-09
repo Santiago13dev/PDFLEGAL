@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "node --watch server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "scrape:suin": "node scripts/scrapers/suin.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
