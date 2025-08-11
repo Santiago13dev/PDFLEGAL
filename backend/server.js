@@ -1,4 +1,3 @@
-//arranque del servidor y montaje de rutas
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -11,17 +10,26 @@ import documentRoutes from "./routes/document.routes.js";
 import analyticsRoutes from './routes/analytics.routes.js';
 
 dotenv.config();
+
 const app = express();
 app.use(helmet());
 app.use(cors({ origin: process.env.CLIENT_URL || "*", credentials: true }));
 app.use(express.json({ limit: "2mb" }));
 app.use(morgan("dev"));
+
 app.use("/api/auth", authRoutes);
 app.use("/api/templates", templateRoutes);
 app.use("/api/documents", documentRoutes);
 app.use('/api/analytics', analyticsRoutes);
+
+// ✅ health y raíz
 app.get("/api/health", (req, res) => res.json({ ok: true }));
+app.get("/", (req, res) => {
+  res.json({ ok: true, service: "pdflegal-backend", version: "1.0.0" });
+});
+
 const PORT = process.env.PORT || 4000;
+
 connectDB()
   .then(() => {
     app.listen(PORT, () => console.log("API http://localhost:" + PORT));
