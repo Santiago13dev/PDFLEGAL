@@ -9,7 +9,7 @@ import Form from "./pages/Form.jsx";
 import Preview from "./pages/Preview.jsx";
 import Search from "./pages/Search.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
-import { AuthProvider } from "./store/auth.js";
+import { AuthProvider } from "./store/auth.jsx";
 import Analytics from './pages/Analytics.jsx';
 
 export default function App() {

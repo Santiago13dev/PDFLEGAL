@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar.jsx";
-import { AuthCtxProvider } from './store/auth.jsx';
+import { AuthProvider } from "../store/auth.jsx";
 import { useNavigate } from "react-router-dom";
 export default function Register() {
   const [name, setName] = useState("");

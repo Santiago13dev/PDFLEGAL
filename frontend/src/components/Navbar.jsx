@@ -2,7 +2,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
-import { AuthCtxProvider } from './store/auth.jsx';
+import { AuthProvider } from "../store/auth.jsx";
 export default function Navbar() {
   const { user, logout } = useAuth();
   const nav = useNavigate();
