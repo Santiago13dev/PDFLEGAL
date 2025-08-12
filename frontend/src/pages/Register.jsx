@@ -1,20 +1,33 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar.jsx";
-import { useAuth } from "../store/auth.jsx"; // ✅ si necesitas el usuario
+import { useAuth } from "../store/auth.jsx";
 import { useNavigate } from "react-router-dom";
+
 export default function Register() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName]         = useState("");
+  const [email, setEmail]       = useState("");
   const [password, setPassword] = useState("");
-  const [msg, setMsg] = useState("");
-  const { register } = useAuth();
+  const [msg, setMsg]           = useState("");
+  const [loading, setLoading]   = useState(false);
+
+  const { registerUser } = useAuth();
   const nav = useNavigate();
+
   async function onSubmit(e) {
     e.preventDefault();
-    const res = await register(name, email, password);
-    if (res?.ok) nav("/dashboard");
-    else setMsg(res?.message || "Error");
+    setMsg("");
+    setLoading(true);
+    try {
+      const res = await registerUser({ name, email, password });
+      if (res?.ok) nav("/dashboard", { replace: true });
+      else setMsg(res?.message || "Error de registro");
+    } catch (err) {
+      setMsg(err.message || "Error inesperado");
+    } finally {
+      setLoading(false);
+    }
   }
+
   return (
     <>
       <Navbar />
@@ -23,40 +36,26 @@ export default function Register() {
           <h2 className="text-xl font-semibold text-slate-900">Crear cuenta</h2>
           <form onSubmit={onSubmit} className="mt-4 space-y-3">
             <div>
-              <label className="text-sm font-medium text-slate-800">
-                Nombre
-              </label>
-              <input
-                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+              <label className="text-sm font-medium text-slate-800">Nombre</label>
+              <input className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                     value={name} onChange={(e) => setName(e.target.value)} />
             </div>
             <div>
-              <label className="text-sm font-medium text-slate-800">
-                Email
-              </label>
-              <input
-                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+              <label className="text-sm font-medium text-slate-800">Email</label>
+              <input className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                     value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div>
-              <label className="text-sm font-medium text-slate-800">
-                Contraseña
-              </label>
-              <input
-                type="password"
-                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <label className="text-sm font-medium text-slate-800">Contraseña</label>
+              <input type="password"
+                     className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                     value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
             {msg && <p className="text-sm text-red-600">{msg}</p>}
             <div className="pt-2 flex gap-3">
-              <button className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-500">
-                Crear cuenta
+              <button disabled={loading}
+                      className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-500 disabled:opacity-60">
+                {loading ? "Creando…" : "Crear cuenta"}
               </button>
             </div>
           </form>
