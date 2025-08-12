@@ -1,43 +1,35 @@
-// src/store/auth.jsx
 import { createContext, useContext, useState } from "react";
+import { API as api } from "../api/client.js";
 
 const AuthCtx = createContext(null);
-const API = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
   const login = async (credentials) => {
-    const res = await fetch(`${API}/api/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(credentials),
-    });
-    if (!res.ok) throw new Error("Error de login");
-    const data = await res.json();
-    setUser(data.user || data);
-    return { ok: true, data };
+    try {
+      const { data } = await api.post("/auth/login", credentials);
+      setUser(data.user || data);
+      return { ok: true, data };
+    } catch (err) {
+      const message = err.response?.data?.message || err.message || "Error de login";
+      return { ok: false, message };
+    }
   };
 
   const registerUser = async ({ name, email, password }) => {
-    const res = await fetch(`${API}/api/auth/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ name, email, password }),
-    });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      return { ok: false, message: err.message || "Error de registro" };
+    try {
+      const { data } = await api.post("/auth/register", { name, email, password });
+      setUser(data.user || { name, email });
+      return { ok: true, data };
+    } catch (err) {
+      const message = err.response?.data?.message || err.message || "Error de registro";
+      return { ok: false, message };
     }
-    const data = await res.json();
-    setUser(data.user || { name, email });
-    return { ok: true, data };
   };
 
   const logout = async () => {
-    try { await fetch(`${API}/api/auth/logout`, { credentials: "include" }); } catch {}
+    try { await api.get("/auth/logout"); } catch {}
     setUser(null);
   };
 
