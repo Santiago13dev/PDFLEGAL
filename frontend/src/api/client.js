@@ -1,8 +1,9 @@
 import axios from "axios";
 
-// frontend/.env -> VITE_API_URL=http://localhost:4000
 const RAW  = import.meta.env.VITE_API_URL || "http://localhost:4000";
-const BASE = RAW.replace(/\/+$/, ""); // quita "/" finales
+const BASE = RAW.replace(/\/+$/,""); // quita "/" finales
+
+console.log('VITE_API_URL =', import.meta.env.VITE_API_URL); // ← quítalo luego
 
 export const API = axios.create({
   baseURL: `${BASE}/api`,
@@ -10,9 +11,8 @@ export const API = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-// Bearer desde localStorage (si lo usas)
-API.interceptors.request.use((cfg) => {
-  const t = localStorage.getItem("pdflegal_token");
+API.interceptors.request.use(cfg => {
+  const t = localStorage.getItem('pdflegal_token');
   if (t) cfg.headers.Authorization = `Bearer ${t}`;
   return cfg;
 });
