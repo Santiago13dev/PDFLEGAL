@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar.jsx";
-import { AuthProvider } from "../store/auth.jsx";
+import { useAuth } from "../store/auth.jsx"; // ✅ si necesitas el usuario
 import { useNavigate } from "react-router-dom";
 export default function Register() {
   const [name, setName] = useState("");

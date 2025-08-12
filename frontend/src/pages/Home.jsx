@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar.jsx";
 import { Link } from "react-router-dom";
-import { AuthCtxProvider } from '../store/auth.jsx';
+import { useAuth } from "../store/auth.jsx"; // ✅ si necesitas el usuario
 export default function Home() {
   const { user } = useAuth();
   return (
@@ -56,3 +56,4 @@ export default function Home() {
     </>
   );
 }
+

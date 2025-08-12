@@ -1,9 +1,10 @@
-//Aquí definimos qué URL carga cada page
-import React from "react";
+// src/routes/ProtectedRoute.jsx
 import { Navigate } from "react-router-dom";
-import { AuthProvider } from "../store/auth.jsx";
+import { useAuth } from "../store/auth.jsx";
+
 export default function ProtectedRoute({ children }) {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  if (loading) return <div style={{padding:16}}>Cargando…</div>;
   if (!user) return <Navigate to="/login" replace />;
   return children;
 }
