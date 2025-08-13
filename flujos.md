@@ -1,4 +1,5 @@
 # Flujos Funcionales
+Aplicacion para editar pfd´s y configurar archivos legislativos
 
 ## 1) Autenticación
 1. Usuario ingresa email/contraseña.
