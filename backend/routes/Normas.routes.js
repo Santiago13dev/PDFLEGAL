@@ -1,4 +1,3 @@
-// backend/routes/normas.routes.js
 import { Router } from 'express'
 import Norma from '../models/Norma.js'
 const r = Router()
