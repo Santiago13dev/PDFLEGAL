@@ -1,3 +1,4 @@
+//conexión a mongodb
 import mongoose from 'mongoose'
 
 const auditSchema = new mongoose.Schema(
