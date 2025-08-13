@@ -1,4 +1,4 @@
-// generar y guardar documentos.
+// generar y guardar documentos dentro de la base de datos
 import Document from "../models/Document.js";
 import Template from "../models/Template.js";
 import { ok, fail } from "../utils/response.js";
