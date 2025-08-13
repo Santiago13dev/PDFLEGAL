@@ -13,7 +13,7 @@ export async function register(req, res) {
     const exists = await User.findOne({ email });
     if (exists) return fail(res, "Email ya registrado", 409);
 
-    // 👇 guarda en "password"
+    // 👇 guarda en "password" ilimitados usuarios registrados
     const hash = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, password: hash });
 
