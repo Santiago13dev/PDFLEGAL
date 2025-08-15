@@ -1,4 +1,4 @@
-// src/routes/ProtectedRoute.jsx
+// Donde tengo protejida mi ruta de autenticación
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../store/auth.jsx";
 
