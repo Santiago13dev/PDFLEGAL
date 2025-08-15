@@ -1,3 +1,4 @@
+// En este componente traemos la logica del registro y login de usuario
 import { createContext, useContext, useState, useEffect } from "react";
 import { API as api } from "../api/client.js";
 
