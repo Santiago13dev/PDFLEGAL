@@ -1,3 +1,4 @@
+//pagina principal para importaciones del nav bar 
 import React from "react";
 import Navbar from "../components/Navbar.jsx";
 import { Link } from "react-router-dom";
