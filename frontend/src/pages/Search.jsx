@@ -1,3 +1,4 @@
+// busqueda indexada de la ley de colombia
 import React, { useState } from "react";
 import Navbar from "../components/Navbar.jsx";
 const MOCK = [
